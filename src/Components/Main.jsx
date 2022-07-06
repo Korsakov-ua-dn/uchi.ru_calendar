@@ -1,4 +1,3 @@
-// import { useId } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { variables } from "../utils/variables";
@@ -23,10 +22,6 @@ const Main = () => {
    const deleteCeilHandler = () => {
     dispatch(removeEvent(activeCeil))
    }
-   
-
-// console.log(activeCeil);
-// console.log(ceilsWithEvent);
 
     return (
         <StyledCalendar>
@@ -83,16 +78,13 @@ export default Main;
 
 const Ceil = ({ el }) => {
     const { activeCeil, ceilsWithEvent } = useSelector(s => s.app);
-
     const ceilClassName = `${activeCeil == el ? 'active' : ''} ${ceilsWithEvent.find(e => e == el) ? 'event' : ''} ceil`
     return <li key={el} id={el} className={ceilClassName}></li>
 }
 
 const HeaderItem = ({ i }) => {
     const now = new Date()
-
     const dateClassName = now.getDate() === i.getDate()? 'date flex-center active' : 'date flex-center'
-
     return (
         <div className='header_item'>
             <span className='day'>{["S", "M", "T", "W", "T", "F", "S"][i.getDay()]}</span>
