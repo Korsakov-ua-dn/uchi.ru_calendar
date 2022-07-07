@@ -17,16 +17,15 @@ const Popup = () => {
     }
 
     const [date, setDate] = useState('');
-    const [error, setError] = useState(false);
+    const [error, setError] = useState('');
 
     const onChangeInputHandler = (e) => {
     const value = e.currentTarget.value;
         setDate(value)
-
         if (value.match( /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/ )) {
-            setError(false)
+            setError('')
         } else {
-            setError(true)
+            setError(`Please use YYYY-MM-DD HH:mm:ss format of date`)
         }
     }
 
@@ -38,7 +37,7 @@ const Popup = () => {
                     <span className='popup-title'>https://calendar.com</span>
                     <span className='popup-deskr'>Enter event time:</span>
                     <span className='popup-date'>YYYY-MM-DD HH:mm:ss</span>
-                    { error && <span className='error'>Please use YYYY-MM-DD HH:mm:ss format of date</span> }
+                    <span className='error'>{ error }</span>
                     <input onChange={onChangeInputHandler} value={date} type="text" />
                 </div>
                 <div className="popup-btn-block">
