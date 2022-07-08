@@ -1,3 +1,4 @@
+import Portal from './Portal';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -30,22 +31,24 @@ const Popup = () => {
     }
 
     return (
-        <StyledPopup className='popup-wrapper'>
-            <div onClick={() => dispatch(setOpenModal(false))} className='popup-background'/>
-            <div className='popup'>
-                <div className="popup-content-block">
-                    <span className='popup-title'>https://calendar.com</span>
-                    <span className='popup-deskr'>Enter event time:</span>
-                    <span className='popup-date'>YYYY-MM-DD HH:mm:ss</span>
-                    <span className='error'>{ error }</span>
-                    <input onChange={onChangeInputHandler} value={date} type="text" />
+        <Portal>
+            <StyledPopup className='popup-wrapper'>
+                <div onClick={() => dispatch(setOpenModal(false))} className='popup-background'/>
+                <div className='popup'>
+                    <div className="popup-content-block">
+                        <span className='popup-title'>https://calendar.com</span>
+                        <span className='popup-deskr'>Enter event time:</span>
+                        <span className='popup-date'>YYYY-MM-DD HH:mm:ss</span>
+                        <span className='error'>{ error }</span>
+                        <input onChange={onChangeInputHandler} value={date} type="text" />
+                    </div>
+                    <div className="popup-btn-block">
+                        <button onClick={() => dispatch(setOpenModal(false))} className='popup-btn popup-btn_cancel'>Cancel</button>
+                        <button onClick={addNewEventHandler} className='popup-btn popup-btn_ok'>OK</button>
+                    </div>
                 </div>
-                <div className="popup-btn-block">
-                    <button onClick={() => dispatch(setOpenModal(false))} className='popup-btn popup-btn_cancel'>Cancel</button>
-                    <button onClick={addNewEventHandler} className='popup-btn popup-btn_ok'>OK</button>
-                </div>
-            </div>
-        </StyledPopup>
+            </StyledPopup>
+        </Portal>
     )
 };
 
@@ -54,7 +57,7 @@ export default Popup;
 const StyledPopup = styled.div`
 &.popup-wrapper {
     position: fixed;
-    z-index: 20;
+    z-index: 1;
     left: 0;
     top: 0;
     right: 0;
